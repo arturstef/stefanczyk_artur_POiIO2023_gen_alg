@@ -1,0 +1,1 @@
+g++ main.cpp Tparam.cpp -o main.out;./main.out
