@@ -1,1 +1,1 @@
-g++ main.cpp Tparam.cpp -o main.out;./main.out
+clear; g++ main.cpp Tparam.cpp Tcandidate.cpp Tpopulation.cpp Talgorithm.cpp -o main.out;./main.out

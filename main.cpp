@@ -1,27 +1,19 @@
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
+#include <ctime>
 
 #include "Tparam.hpp"
+#include "Tcandidate.hpp"
+#include "Tpopulation.hpp"
+#include "Talgorithm.hpp"
 
 using namespace std;
 
-
 int main()
 {
-	Tparam param1(1,4,1,2);
-	param1.info();
+	srand(time(NULL));
 
-	Tparam param2(0,10,0.5);
-	param2.set_val(2);
-	param2.info();
-
-	param1.set_val(5);
-	param1.info();
-
-	param2.set_val(2.3);
-	param2.info();
-
-	return 0;
+	Talgorithm task {5,0};
+	task.run();
 }
-
-
