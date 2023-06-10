@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include "Tparam.hpp"
+#include <bitset>
 
 using namespace std;
 
@@ -69,6 +70,27 @@ int Tparam::get_val_id(double val)
 		while (fabs(x + _id * dx - val) > dx / 2) _id++;
 		return _id;
 	}
+}
+
+std::string Tparam::doubleToBinary(double value) {
+    unsigned long long* ptr = reinterpret_cast<unsigned long long*>(&value);
+    std::bitset<64> bits(*ptr);
+    return bits.to_string();
+}
+
+double Tparam::binaryToDouble(const std::string& binary) {
+    std::bitset<64> bits(binary);
+    unsigned long long binaryValue = bits.to_ullong();
+
+    double* valuePtr = reinterpret_cast<double*>(&binaryValue);
+    return *valuePtr;
+}
+
+std::string Tparam::get_bval()
+{
+	double val = get_val();
+	std::string bval = doubleToBinary(val);
+	return bval;
 }
 
 void Tparam::info()

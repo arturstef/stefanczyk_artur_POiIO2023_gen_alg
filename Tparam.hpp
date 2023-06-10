@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string>
+#include <bitset>
 
 class Tparam
 {
@@ -30,7 +31,10 @@ class Tparam
 		std::string get_name() { return name; }
 		std::string get_description() { return description; }
 
-		double get_x_start() const { return x_start; }
+		std::string doubleToBinary(double value);
+		double binaryToDouble(const std::string& binary);
+
+ 		double get_x_start() const { return x_start; }
 		double get_x_end() const { return x_end; }
 		double get_dx() const { return dx; }
 
@@ -43,6 +47,7 @@ class Tparam
 			val_id = this->get_val_id(val);
 		}
 		double get_val() const { return x_start + val_id * dx; }
+		std::string get_bval();
 		void info();
 
 	private:

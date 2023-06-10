@@ -21,10 +21,17 @@ class Talgorithm
 	public:
 		
 		Talgorithm(unsigned int max_population_count = 20, unsigned int min_improvement_proc = 3);
-	std::vector<Tcandidate*> sampleVector(const std::vector<Tcandidate*>& objects, std::vector<double>& probabilities);
- 		~Talgorithm();
+		std::vector<Tcandidate*> sampleVector(const std::vector<Tcandidate*>& objects, std::vector<double>& probabilities);
+		void pick_parents(const std::vector<Tcandidate*>& candidates, std::vector<Tcandidate*>& parents); 
+
+		std::string combine_binary(const std::string& num1, const std::string& num2); 
+		double binaryToDouble(const std::string& binary);
+		int get_cut_index(int min, int max); 
+
+		~Talgorithm();
 		void run();
 		void roullet();
+		void cross();
 	private:
 		bool is_stop();
 };
