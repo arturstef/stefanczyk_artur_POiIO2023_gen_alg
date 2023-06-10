@@ -20,7 +20,9 @@ class Tpopulation
 		Tpopulation(const Tpopulation &pattern);
 		void calculate();
 		Tcandidate* get_best_candidate();
-
+		std::vector<Tcandidate*> get_candidates() { return candidates; }				
+		void replace_candidates	(std::vector<Tcandidate*> candidates)
+ { this -> candidates.clear(); this -> candidates.swap(candidates); }				
 		Tpopulation* create_new() { return new Tpopulation(*this); }
 
 		unsigned int get_id() { return _id; }
