@@ -9,13 +9,12 @@ class Tpopulation
 {
 	static unsigned int _id;
 	unsigned int candidates_count;
-
-	Tcandidate* candidate_pattern = nullptr;
-	std::vector<Tcandidate*> candidates;
+		Tcandidate* candidate_pattern = nullptr;
 	double best_val = 0;
 
 	public:
-		
+		std::vector<Tcandidate*> candidates;
+
 		Tpopulation();
 		Tpopulation(const Tpopulation &pattern);
 		void calculate();

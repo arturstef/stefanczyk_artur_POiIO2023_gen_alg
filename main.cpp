@@ -14,6 +14,6 @@ int main()
 {
 	srand(time(NULL));
 
-	Talgorithm task {5,0};
+	Talgorithm task {20,0};
 	task.run();
 }

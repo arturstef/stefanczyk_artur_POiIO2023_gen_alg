@@ -5,6 +5,7 @@
 #include "TcandidateID0Gens2Zad1.hpp"
 #include "TcandidateID0Gens2Zad2.hpp"
 #include "TcandidateID0Gens2Zad3.hpp"
+#include "TcandidateID0Gens2Zad4.hpp"
 
 using namespace std;
 
@@ -36,7 +37,7 @@ Tpopulation::Tpopulation(const Tpopulation &pattern)
 
 void Tpopulation::calculate()
 {
-	double best_val;
+	double best_val = 0;
 	for (int i=0;i<candidates_count;++i)
 	{
 		candidates[i] -> rate();
@@ -68,7 +69,7 @@ Tcandidate* Tpopulation::get_best_candidate()
 void Tpopulation::init()
 {
 	unsigned int candidate_id;
-	cout << "Podaj id osobnika: ";
+	cout << "Podaj id osobnika(0-3): ";
 	cin >> candidate_id;
 	
 	if (candidate_id < 0 || candidate_id > 2)
@@ -84,6 +85,9 @@ void Tpopulation::init()
 			break;
 		case 2:
 			candidate_pattern = new TcandidateID0Gens2Zad3 {};
+			break;
+		case 3:
+			candidate_pattern = new TcandidateID0Gens2Zad4 {};
 			break;
 		default:
 			candidate_pattern = new TcandidateID0Gens2Zad1 {};

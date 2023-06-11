@@ -19,7 +19,6 @@ class Talgorithm
 	Tpopulation * wsk_population_prev = nullptr;
 
 	public:
-		
 		Talgorithm(unsigned int max_population_count = 20, unsigned int min_improvement_proc = 3);
 		std::vector<Tcandidate*> sampleVector(const std::vector<Tcandidate*>& objects, std::vector<double>& probabilities);
 		void pick_parents(const std::vector<Tcandidate*>& candidates, std::vector<Tcandidate*>& parents); 
@@ -32,6 +31,9 @@ class Talgorithm
 		void run();
 		void roullet();
 		void cross();
+
+		void check(std::string text);
+		// void keep_best(Tcandidate candidate_to_keep) { wsk_population_pres -> candidates[0] = new Tcandidate(candidate_to_keep); }
 	private:
 		bool is_stop();
 };
