@@ -13,12 +13,6 @@ Tparam::Tparam(double x_start, double x_end, double dx) : name {""}, description
 	_id = gens_count;
 	set_range(x_start, x_end, dx);
 	set_rand_val();
-	// cout << "Skonstruowano gen o id: \n" << _id << "\n";
-}
-
-Tparam::~Tparam()
-{
-	// cout << "Usunieto gen \n";
 }
 
 Tparam::Tparam(double x_start, double x_end, double dx, double val) : Tparam::Tparam(x_start, x_end, dx)
@@ -42,8 +36,6 @@ Tparam::Tparam(const Tparam &kopia)
 	
 	set_rand_val();
 	val_id += 1;
-	
-	// cout << "Wywołano konstruktor kopiujący\n";
 }
 
 void Tparam::set_range(double x_start, double x_end, double dx)

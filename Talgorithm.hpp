@@ -14,7 +14,7 @@ class Talgorithm
 	unsigned int min_improvement_proc;
 	unsigned int current_population;
 	const double cross_coef = 0.8;
-	const double mutation_coef = 0.2;
+	const double mutation_coef = 0.4;
 	Tpopulation * wsk_population_pres = nullptr;
 	Tpopulation * wsk_population_prev = nullptr;
 
@@ -31,9 +31,7 @@ class Talgorithm
 		void run();
 		void roullet();
 		void cross();
-
-		void check(std::string text);
-		// void keep_best(Tcandidate candidate_to_keep) { wsk_population_pres -> candidates[0] = new Tcandidate(candidate_to_keep); }
+		void mutate();
 	private:
 		bool is_stop();
 };

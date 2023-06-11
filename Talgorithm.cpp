@@ -4,6 +4,9 @@
 #include <random>
 #include <numeric>
 #include <algorithm>
+#include <cstdlib>
+#include <ctime>
+#include <string>
 
 #include "Talgorithm.hpp"
 
@@ -29,7 +32,6 @@ void Talgorithm::run()
 	int iter = 0;
 	while (!wsk_population_prev || !is_stop())
 	{
-		// check("run at begin");
 		wsk_population_pres -> calculate();
 		cout << "++ Population #" << (*wsk_population_pres).get_id() << " best result: " << (*wsk_population_pres).get_best_val() << "\n";
 
@@ -45,7 +47,6 @@ void Talgorithm::run()
 		roullet();
 		cross();
 		wsk_population_pres -> candidates[0] = new Tcandidate(candidate_to_keep);
-		// check("alfa");	
 		iter++;
 	}
 	cout << endl << "++++++ BEST CANDIDATE ++++++" << endl;
@@ -109,15 +110,16 @@ void Talgorithm::roullet()
 		candidate_cost[i] = candidate_cost[i] / cummulative_cost;
 	}
 	vector<Tcandidate*> chosen_candidates = sampleVector(candidates, candidate_cost);	
-	// check("roullet before replace");
 	wsk_population_pres -> replace_candidates(chosen_candidates);
-	// wsk_population_pres -> candidates = chosen_candidates;
-	// check("roullet after replace"); 
 }
 
 void Talgorithm::cross()
 {
-	// check("cross at begin");
+	double randomNumber = static_cast<double>(std::rand()) / RAND_MAX;
+
+	if (randomNumber > cross_coef) 
+		return;
+	
 	vector<Tcandidate*> candidates = wsk_population_pres -> get_candidates();
 	vector<Tcandidate*> chosen_candidates(candidates.size());
 	
@@ -142,14 +144,49 @@ void Talgorithm::cross()
 			new_gen.set_val(new_gen_value);
 			new_genotype.push_back(new_gen);	
 		}	
-		// TODO	
 		chosen_candidates[i] -> replace_genotype(new_genotype);
 	}
-	// check("cross before replace");
-	// wsk_population_pres -> candidates = chosen_candidates;
-	// check("cross after replace");	
 	wsk_population_pres -> replace_candidates(chosen_candidates);
-	// check("cross after replace");
+}
+
+void Talgorithm::mutate()
+{
+	vector<Tcandidate*> candidates = wsk_population_pres -> get_candidates();
+	vector<Tcandidate*> chosen_candidates(candidates.size());
+	
+	std::copy(candidates.begin(), candidates.end(), chosen_candidates.begin());
+
+	std::vector<Tparam> new_genotype;
+		
+	for (int i=0;i<candidates.size();++i)
+	{
+		new_genotype.clear();
+		
+		for (int ii=0;ii<candidates[i]->get_genotype().size();++ii)
+		{
+			std::string new_gen_value_binary = candidates[i] -> get_genotype()[ii].get_bval();
+			
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			std::uniform_real_distribution<double> dis(0.0, 1.0);
+
+			std::string mutated_bval = new_gen_value_binary;
+			for (char& bit : mutated_bval) {
+				double randomNumber = dis(gen);
+				if (randomNumber <= mutation_coef)
+				{
+				    bit = (bit == '0') ? '1' : '0';
+				}
+			}
+
+			double new_gen_value = binaryToDouble(mutated_bval);
+			Tparam new_gen { candidates[i] -> get_genotype()[ii] };
+			new_gen.set_val(new_gen_value);
+			new_genotype.push_back(new_gen);	
+		}	
+		chosen_candidates[i] -> replace_genotype(new_genotype);
+	}
+	wsk_population_pres -> replace_candidates(chosen_candidates);
 }
 
 void Talgorithm::pick_parents(const std::vector<Tcandidate*>& candidates, std::vector<Tcandidate*>& selectedElements) {
@@ -189,13 +226,4 @@ double Talgorithm::binaryToDouble(const std::string& binary) {
     return *valuePtr;
 }
 
-void Talgorithm::check(std::string text)
-{
-	cout << text << endl;
-	wsk_population_pres -> calculate();
-	for (int i=0;i<wsk_population_pres->get_candidates_count();++i)
-	{
-		cout << wsk_population_pres -> get_candidates()[i] -> get_mark() << endl;
-	}
-}
 

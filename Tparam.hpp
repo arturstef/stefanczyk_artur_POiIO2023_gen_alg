@@ -26,7 +26,7 @@ class Tparam
 		Tparam(std::string name, std::string description, double x_start, double x_end, double dx);
 		Tparam(const Tparam &kopia);
 
-		~Tparam();
+		~Tparam() {}
 
 		std::string get_name() { return name; }
 		std::string get_description() { return description; }

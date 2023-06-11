@@ -14,7 +14,6 @@ Tcandidate::Tcandidate(int num) : gens_count { num }
 	mark = 0;
 	rand_gens_val();
 	set_gens_names();
-	// cout << "Skonstruowano osobnika\n";
 }
 
 Tcandidate::Tcandidate(const Tcandidate &kopia) : gens_count { kopia.gens_count }
@@ -35,7 +34,6 @@ Tcandidate::Tcandidate(const Tcandidate &kopia) : gens_count { kopia.gens_count 
 	}
 	set_gens_names();
 	mark = kopia.mark;
-	// cout << "Wywołano konstruktor kopiujący klasy osobnik\n";
 }
 
 void Tcandidate::rand_gens_val()

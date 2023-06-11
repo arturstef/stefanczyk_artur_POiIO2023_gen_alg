@@ -27,7 +27,7 @@ class TcandidateID0Gens2Zad4 : public Tcandidate
             double x1 = genotype[0].get_val();
             double x2 = genotype[1].get_val();
 
-            mark = 2*(-x1 + x2);
+            mark = 2*(-x1*x1*x1 + x2*x1);
         }
 	protected: 
 		void set_range()
