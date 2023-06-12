@@ -46,6 +46,7 @@ void Talgorithm::run()
 		wsk_population_pres = new Tpopulation { *wsk_population_prev };
 		roullet();
 		cross();
+		mutate();
 		wsk_population_pres -> candidates[0] = new Tcandidate(candidate_to_keep);
 		iter++;
 	}
